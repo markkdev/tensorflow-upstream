@@ -48,7 +48,8 @@ class ProfilerTest(test_util.TensorFlowTestCase):
     profiler.start('/\/\/:123')
     # pylint: enable=anomalous-backslash-in-string
     with self.assertRaises(Exception):
-      profiler.stop()
+      profiler.export_to_tb()
+    profiler.stop()
     profiler.start(logdir)
     profiler.stop()
 
