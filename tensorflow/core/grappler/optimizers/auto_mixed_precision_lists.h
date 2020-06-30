@@ -120,6 +120,8 @@ class AutoMixedPrecisionListsCuda : public AutoMixedPrecisionLists {
         "CudnnRNNV2",
         "CudnnRNNV3",
         "Einsum",
+        "Dropout",
+        "DropoutGrad",
         "GRUBlockCell",
         "GRUBlockCellGrad",
         "LSTMBlockCell",
