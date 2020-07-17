@@ -47,6 +47,9 @@ namespace {
 
 #if GOOGLE_CUDA
 const std::pair<int, int> kMinGPUArch = {7, 0};
+#elif TENSORFLOW_USE_ROCM
+const std::pair<int, int> kMinGPUArch = {900,0}; 
+// TODO change this to handle strings for ROCm 3.7
 #else
 const std::pair<int, int> kMinGPUArch = {0, 0};
 #endif
@@ -1159,6 +1162,7 @@ std::pair<int, int> GetDeviceGPUArch(
 
 bool AutoMixedPrecisionImpl::IsOnSuitableGPUArch(const NodeDef& node) const {
   return GetDeviceGPUArch(virtual_placer_.get_device(node)) >= kMinGPUArch;
+// TODO change to work with strings for ROCm 3.7
 }
 
 bool AutoMixedPrecisionImpl::ShouldProcess(const NodeDef& node) const {
