@@ -48,7 +48,7 @@ namespace {
 #if GOOGLE_CUDA
 const std::pair<int, int> kMinGPUArch = {7, 0};
 #elif TENSORFLOW_USE_ROCM
-const std::pair<int, int> kMinGPUArch = {900,0}; 
+const std::pair<int, int> kMinGPUArch = {906,0}; 
 // TODO change this to handle strings for ROCm 3.7
 #else
 const std::pair<int, int> kMinGPUArch = {0, 0};
