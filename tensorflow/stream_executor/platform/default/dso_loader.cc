@@ -140,7 +140,11 @@ port::StatusOr<void*> GetRoctracerDsoHandle() {
   return GetDsoHandle("roctracer64", "");
 }
 
-port::StatusOr<void*> GetHipDsoHandle() { return GetDsoHandle("hip_hcc", ""); }
+port::StatusOr<void*> GetHipsparseDsoHandle() {
+  return GetDsoHandle("hipsparse", "");
+}
+
+port::StatusOr<void*> GetHipDsoHandle() { return GetDsoHandle("amdhip64", ""); }
 
 }  // namespace DsoLoader
 
@@ -212,6 +216,11 @@ port::StatusOr<void*> GetRocrandDsoHandle() {
 
 port::StatusOr<void*> GetRoctracerDsoHandle() {
   static auto result = new auto(DsoLoader::GetRoctracerDsoHandle());
+  return *result;
+}
+
+port::StatusOr<void*> GetHipsparseDsoHandle() {
+  static auto result = new auto(DsoLoader::GetHipsparseDsoHandle());
   return *result;
 }
 
