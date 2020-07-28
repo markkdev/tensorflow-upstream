@@ -144,4 +144,11 @@ cc_import(
     visibility = ["//visibility:public"],
 )
 
+filegroup(
+    name = "rocm_root",
+    srcs = [
+        "rocm/bin/clang-offload-bundler",
+    ],
+)
+
 %{copy_rules}
