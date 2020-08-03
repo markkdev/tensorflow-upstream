@@ -1044,6 +1044,8 @@ int GetCudaVersion(const Cluster& cluster) {
 
 std::pair<int, int> GetDeviceGPUArch(const Cluster& cluster){
     auto devices = cluster.GetDevices();
+    int major, minor;
+    int mmajor;
     for (const auto& device: devices){
         const DeviceProperties& device_properties = device.second; 
         if (device_properties.type() != "GPU") return {0, 0};
@@ -1052,8 +1054,6 @@ std::pair<int, int> GetDeviceGPUArch(const Cluster& cluster){
         if (split_arch_str.empty()) {
             return {0, 0};
         }
-        int major, minor;
-        int mmajor;
         strings::safe_strto32(split_arch_str[0], &mmajor);  
         if (!strings::safe_strto32(split_arch_str[0], &major)) {
             return {0, 0};
