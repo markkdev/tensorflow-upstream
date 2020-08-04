@@ -44,6 +44,22 @@ namespace tensorflow {
 namespace grappler {
 namespace {
 
+#if TENSORFLOW_USE_ROCM
+std::vector<std::string> FP16SupportedDevices = 
+{
+    "906", 
+    "908", 
+    "90a"
+};
+
+bool HasEnhancedFP16ComputeSupport(std::pair<int, int> gpu_arch){
+    std::string arch = std::to_string(gpu_arch.first); 
+    return std::find(std::begin(FP16SupportedDevices), 
+                     std::end(FP16SupportedDevices), arch)
+           != std::end(FP16SupportedDevices); 
+}
+#endif
+
 template <DataType DTYPE>
 Tensor GenerateIdentityMatrix(int64 height, int64 width) {
   typedef typename EnumToDataType<DTYPE>::Type T;

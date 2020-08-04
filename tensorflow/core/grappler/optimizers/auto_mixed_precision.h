@@ -24,21 +24,6 @@ namespace grappler {
 
 enum class AutoMixedPrecisionMode { CUDA, MKL };
 
-#if TENSORFLOW_USE_ROCM
-std::vector<std::string> FP16SupportedDevices = 
-{
-    "906", 
-    "908", 
-    "90a"
-};
-
-bool HasEnhancedFP16ComputeSupport(std::pair<int, int> gpu_arch){
-    std::string arch = std::to_string(gpu_arch.first); 
-    return std::find(std::begin(FP16SupportedDevices), 
-                     std::end(FP16SupportedDevices), arch)
-           != std::end(FP16SupportedDevices); 
-}
-#endif
 
 // Convert data types to float16 or bfloat16 where appropriate to improve
 // performance on GPUs or CPUs.

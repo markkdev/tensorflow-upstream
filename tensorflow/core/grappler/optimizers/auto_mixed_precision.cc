@@ -59,6 +59,22 @@ const char kCastToFp16[] = "CastToFp16";
 const char kCastToBf16[] = "CastToBf16";
 const char kCastToFp32[] = "CastToFp32";
 
+#if TENSORFLOW_USE_ROCM
+std::vector<std::string> FP16SupportedDevices = 
+{
+    "906", 
+    "908", 
+    "90a"
+};
+
+bool HasEnhancedFP16ComputeSupport(std::pair<int, int> gpu_arch){
+    std::string arch = std::to_string(gpu_arch.first); 
+    return std::find(std::begin(FP16SupportedDevices), 
+                     std::end(FP16SupportedDevices), arch)
+           != std::end(FP16SupportedDevices); 
+}
+#endif
+
 // Instances of this class represent unique type attribute identifiers within a
 // node. It handles regular type attributes, list type attributes (where
 // type_index is set to the index in the type list), and fixed types.
