@@ -32,7 +32,7 @@ std::vector<std::string> FP16SupportedDevices =
     "90a"
 };
 
-bool HasEnhancedFP16ComputeSupport(std::pair<int, int> &gpu_arch){
+bool HasEnhancedFP16ComputeSupport(std::pair<int, int> gpu_arch){
     std::string arch = std::to_string(gpu_arch.first); 
     return std::find(std::begin(FP16SupportedDevices), 
                      std::end(FP16SupportedDevices), arch)
