@@ -1164,7 +1164,7 @@ bool AutoMixedPrecisionImpl::IsOnSuitableGPUArch(const NodeDef& node) const {
 #ifndef TENSORFLOW_USE_ROCM
   return GetDeviceGPUArch(virtual_placer_.get_device(node)) >= kMinGPUArch;
 #else
-  return HasEnhancedFP16ComputeSupport(virtual_placer_.get_device(node));
+  return HasEnhancedFP16ComputeSupport(GetDeviceGPUArch(virtual_placer_.get_device(node)));
 #endif
 }
 
