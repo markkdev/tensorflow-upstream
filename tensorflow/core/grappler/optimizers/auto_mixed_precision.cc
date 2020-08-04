@@ -1161,8 +1161,11 @@ std::pair<int, int> GetDeviceGPUArch(
 }
 
 bool AutoMixedPrecisionImpl::IsOnSuitableGPUArch(const NodeDef& node) const {
+#ifndef TENSORFLOW_USE_ROCM
   return GetDeviceGPUArch(virtual_placer_.get_device(node)) >= kMinGPUArch;
-// TODO change to work with strings for ROCm 3.7
+#else
+  return HasEnhancedFP16ComputeSupport(virtual_placer_.get_device(node));
+#endif
 }
 
 bool AutoMixedPrecisionImpl::ShouldProcess(const NodeDef& node) const {

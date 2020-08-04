@@ -1095,7 +1095,7 @@ TEST_F(AutoMixedPrecisionTest, BatchMatMul) {
 #if GOOGLE_CUDA
   if (GetCudaVersion(*virtual_cluster_.get()) >= 9010) {
 #elif TENSORFLOW_USE_ROCM
-  if (GetDeviceGPUArch(*virtual_cluster_.get()) >= kMinGPUArch){
+  if (HasEnhancedFP16ComputeSupport(GetDeviceGPUArch(*virtual_cluster_.get()))){
 #else  // TENSORFLOW_USE_ROCM
   if (true) {
 #endif
