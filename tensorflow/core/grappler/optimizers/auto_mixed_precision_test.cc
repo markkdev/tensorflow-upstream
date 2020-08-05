@@ -44,15 +44,6 @@ namespace tensorflow {
 namespace grappler {
 namespace {
 
-#if TENSORFLOW_USE_ROCM
-std::vector<std::string> FP16SupportedDevices = 
-{
-    "906", 
-    "908", 
-    "90a"
-};
-#endif 
-
 template <DataType DTYPE>
 Tensor GenerateIdentityMatrix(int64 height, int64 width) {
   typedef typename EnumToDataType<DTYPE>::Type T;
