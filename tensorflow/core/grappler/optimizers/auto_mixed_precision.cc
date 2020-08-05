@@ -60,13 +60,6 @@ const char kCastToBf16[] = "CastToBf16";
 const char kCastToFp32[] = "CastToFp32";
 
 #if TENSORFLOW_USE_ROCM
-std::vector<std::string> FP16SupportedDevices = 
-{
-    "906", 
-    "908", 
-    "90a"
-};
-
 bool HasEnhancedFP16ComputeSupport(std::pair<int, int> gpu_arch){
     std::string arch = std::to_string(gpu_arch.first); 
     return std::find(std::begin(FP16SupportedDevices), 
