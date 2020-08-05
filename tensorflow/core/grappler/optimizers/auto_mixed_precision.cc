@@ -43,21 +43,6 @@ limitations under the License.
 
 namespace tensorflow {
 namespace grappler {
-namespace {
-
-#if GOOGLE_CUDA
-const std::pair<int, int> kMinGPUArch = {7, 0};
-#elif TENSORFLOW_USE_ROCM
-const std::pair<int, int> kMinGPUArch = {906,0}; 
-// TODO change this to handle strings for ROCm 3.7
-#else
-const std::pair<int, int> kMinGPUArch = {0, 0};
-#endif
-
-const char kSuffix[] = "AutoMixedPrecision";
-const char kCastToFp16[] = "CastToFp16";
-const char kCastToBf16[] = "CastToBf16";
-const char kCastToFp32[] = "CastToFp32";
 
 #if TENSORFLOW_USE_ROCM
 std::vector<std::string> FP16SupportedDevices = 
@@ -74,6 +59,23 @@ bool HasEnhancedFP16ComputeSupport(std::pair<int, int> gpu_arch){
            != std::end(FP16SupportedDevices); 
 }
 #endif
+
+namespace {
+
+#if GOOGLE_CUDA
+const std::pair<int, int> kMinGPUArch = {7, 0};
+#elif TENSORFLOW_USE_ROCM
+const std::pair<int, int> kMinGPUArch = {906,0}; 
+// TODO change this to handle strings for ROCm 3.7
+#else
+const std::pair<int, int> kMinGPUArch = {0, 0};
+#endif
+
+const char kSuffix[] = "AutoMixedPrecision";
+const char kCastToFp16[] = "CastToFp16";
+const char kCastToBf16[] = "CastToBf16";
+const char kCastToFp32[] = "CastToFp32";
+
 
 // Instances of this class represent unique type attribute identifiers within a
 // node. It handles regular type attributes, list type attributes (where
