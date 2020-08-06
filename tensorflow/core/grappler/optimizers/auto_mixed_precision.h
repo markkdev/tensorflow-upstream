@@ -26,7 +26,7 @@ enum class AutoMixedPrecisionMode { CUDA, MKL };
 
 //Getting FP16 supported devices for ROCm
 #if TENSORFLOW_USE_ROCM
-extern std::vector<std::string> FP16SupportedDevices;
+extern std::array<std::string, 3> FP16SupportedDevices;
 
 bool HasEnhancedFP16ComputeSupport(std::pair<int, int> gpu_arch);
 #endif
